@@ -2,7 +2,7 @@ FROM node:current-alpine
 
 USER node
 
-WORKDIR /home/node/src
+WORKDIR /home/docker-demo
 
 COPY --chown=node:node package.json package-lock.json ./
 
