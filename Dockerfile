@@ -9,19 +9,9 @@ RUN npm ci
 
 COPY . .
 
+RUN npm run build
+
 # Runtime stage
-FROM alpine:latest AS runtime
+FROM nginx:alpine AS runtime
 
-RUN apk add --update nodejs
-
-RUN addgroup -S node && adduser -S node -G node
-
-USER node
-
-WORKDIR /home/docker-demo
-
-COPY --chown=node:node --from=build /build .
-
-EXPOSE 8000
-
-CMD ["node", "./src/index.js"]
+COPY --chown=node:node --from=build /build/build /usr/share/nginx/html

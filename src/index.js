@@ -1,32 +1,17 @@
-const hapi = require("@hapi/hapi");
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-async function start() {
-  const server = hapi.server({
-    host: "0.0.0.0",
-    port: process.env.PORT || 8000,
-  });
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-  server.route({
-    method: "GET",
-    path: "/",
-    handler() {
-      return { success: true };
-    },
-  });
-
-  await server.register({
-    plugin: require("hapi-pino"),
-    options: {
-      prettyPrint: true,
-    },
-  });
-
-  await server.start();
-
-  return server;
-}
-
-start().catch((err) => {
-  console.log(err);
-  process.exit(1);
-});
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
