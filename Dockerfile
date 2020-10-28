@@ -1,5 +1,5 @@
 # Build stage
-FROM node:current-alpine AS build
+FROM node:lts-alpine AS build
 
 WORKDIR /build
 
@@ -14,4 +14,4 @@ RUN npm run build
 # Runtime stage
 FROM nginx:alpine AS runtime
 
-COPY --chown=node:node --from=build /build/build /usr/share/nginx/html
+COPY --from=build /build/build /usr/share/nginx/html
